@@ -70,7 +70,7 @@ done
 #   software: git diff xdotool
 actualizar_script(){
 archivo_local="crear_prompt.sh" # Nombre del archivo local
-ruta_repositorio="https://github.com/sukigsx/crear_prompt_terminal.git" #ruta del repositorio para actualizar y clonar con git clone  https://github.com/sukigsx/crear_prompt_terminal
+ruta_repositorio="https://github.com/sukigsx/PromptTerminal_gui.git" #ruta del repositorio para actualizar y clonar con git clone  https://github.com/sukigsx/crear_prompt_terminal
 
 # Obtener la ruta del script
 descarga=$(dirname "$(readlink -f "$0")")
