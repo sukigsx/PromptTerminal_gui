@@ -192,7 +192,7 @@ else
 
         "Crear un lanzador")
             #recopila la ruta de donde esta el script
-            ruta_script=$(pwd)
+            ruta_script=$(dirname "$(readlink -f "$0")")
             #comprueba que exista la carpeta Escritorio
             if [ -d /home/$(whoami)/Escritorio/ ];then
                 ruta_lanzador=/home/$(whoami)/Escritorio
