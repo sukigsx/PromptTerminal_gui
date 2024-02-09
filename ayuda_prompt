@@ -1,0 +1,12 @@
+
+----- AYUDA DE KLA CREACION DEL PROMPT -----
+ 
+Se abrira en el navegador que seleccionaste la siguiente web:  https://bash-prompt-generator.org/
+
+es un generador en línea que te ayuda a crear un prompt personalizado para la terminal Bash en sistemas Unix/Linux. El prompt es la parte de la terminal que muestra información como el nombre de usuario, el nombre de la máquina y la ubicación del directorio actual, y a menudo se puede personalizar para incluir información adicional útil para el usuario.
+
+Dicho esto, cuando visitas el sitio, puedes ver un formulario con varias opciones para personalizar tu prompt de Bash. Estas opciones pueden incluir el color del texto, el color de fondo, la información a mostrar (como el nombre de usuario, el nombre de la máquina, la ruta del directorio actual, etc.), y la forma en que se presenta esta información (por ejemplo, entre corchetes, con un símbolo específico, etc.).
+
+Cuando ya lo tengas todo listo, simplemente tienes que darle a copiar seleccionando todo el codigo o simplemente darle al icono de la derecha de (Output).
+
+Despues cierra el navegador y listo.

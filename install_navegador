@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#navegador="firefox"
+
+# Comprobar si el usuario pertenece al grupo sudo
+if groups | grep -q "\bsudo\b"; then
+    echo ""
+else
+    zenity --error --title="Creado por SUKIGSX" --text="El usuario $(whoami). NO pertenece al grupo sudo imposibe instalar."
+fi
+
+# Solicitar la contraseña con Zenity
+contador=1
+while [ $contador -lt 4 ]
+do
+if [ $contador = 4 ]; then
+    zenity --info --title="Creado por SUKIGSX" --text="Demasiados intentos, SALIENDO." --timeout=2
+    exit
+fi
+
+#password=$(zenity --password --text="Creado por SUKIGSX" --title="Ingrese su contraseña de sudo para el usuario $(whoami)")
+password=$(zenity --forms --title="Creado por SUKIGSX" \
+--text="   Ingresa la contraseña de sudo del usuario $(whoami)   " \
+--add-password="Contraseña" \
+--cancel-label="Atras" \
+--ok-label="Aceptar")
+
+if [ $? = 1 ]; then
+    exit
+fi
+
+
+# Verificar si se ingresó una contraseña
+if [ -n "$password" ]; then
+    # Ejecutar el comando con sudo y la contraseña proporcionada para comprobar si es correcta
+    echo "$password" | sudo -S apt update > /dev/null 2>&1
+    if [ $? = 0 ]; then
+        echo "$password" | sudo -S apt install -y $navegador > /dev/null 2>&1
+
+        if [ $? = 100 ]; then
+            zenity --error --title="Creado por SUKIGSX" --text="No se ha podido instalar $navegador." --timeout=5; exit
+        fi
+
+        # Verificar el código de salida del comando
+        if [ -x "$(which $navegador)" ]; then
+            zenity --info --title="Creado por SUKIGSX" --text="Instalacion de $navegador es correcta." --timeout=5
+            contador=4
+        else
+            zenity --error --title="Creado por SUKIGSX" --text="No se ha podido instalar $navegador." --timeout=5
+            contador=4
+        fi
+    else
+        zenity --error --title="Creado por SUKIGSX" --text="Contraseña incorrecta. Intento $contador/3."
+        contador=$((contador + 1))
+    fi
+
+
+else
+    zenity --error --title="Creado por SUKIGSX" --text="No se proporcionó ninguna contraseña. Intento $contador/3."
+    contador=$((contador + 1))
+fi
+done

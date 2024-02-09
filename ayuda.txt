@@ -1,0 +1,35 @@
+----- AYUDA -----
+
+Este script esta pensado para funcionar en entornos linux basados en debian y que estes utilizando una sheel bash.
+
+Con el podras crear un prompt para la terminal totalmente pesonalizado.
+
+El "prompt" en una terminal Bash es el texto que aparece antes del cursor cuando estás esperando a que ingreses un comando. Por lo general, el prompt muestra información útil, como el nombre de usuario, el nombre de la computadora, el directorio actual, etc.
+
+Este script en bash realiza varias tareas:
+
+1- Comprobación de conexión a Internet: Primero, verifica si hay conexión a Internet intentando hacer ping a google.com. Si la comprobación tiene éxito, muestra un mensaje de que la conexión está OK utilizando
+
+2- Menú principal: Después de verificar la conexión, muestra un menú principal con las siguientes opciones_
+    - Crear prompt nuevo: Ejecuta un script llamado crear_prompt_nuevo.sh.
+        Comprobación de navegadores instalados: El script comprueba si hay navegadores web como Firefox, Google Chrome o Chromium instalados en el sistema.
+
+        Interacción con el usuario: Si no se encuentra ningún navegador instalado, el script muestra un menú de selección utilizando Zenity para permitir al usuario elegir qué navegador instalar.
+
+        Instalación del navegador seleccionado: Cuando se selecciona un navegador para instalar, el script exporta esa selección a otro script llamado install_navegador.sh y lo ejecuta.
+
+        Selección de navegador existente: Si hay navegadores instalados, el usuario puede seleccionar uno de ellos para continuar con la creación de un "prompt" personalizado para la terminal.
+
+        Creación del prompt: Después de seleccionar un navegador, el script muestra información sobre la creación del "prompt" utilizando Zenity. Luego, permite al usuario navegar a un sitio web específico para generar un prompt personalizado. El contenido generado se copia al portapapeles.
+
+        Confirmación del prompt: Después de generar el prompt, el script pregunta al usuario si el prompt generado es correcto.
+
+        Modificación del .bashrc: Si el usuario confirma el prompt generado, el script agrega una entrada en el archivo .bashrc del usuario para cargar el prompt personalizado en cada sesión de terminal.
+
+        Guardado del prompt generado: El contenido del prompt generado se guarda en un archivo dentro de la carpeta .config del usuario para que pueda ser utilizado en futuras sesiones.
+
+    - Borrar prompt: Muestra un mensaje de confirmación utilizando zenity --question y, si el usuario confirma, elimina archivos y líneas específicas del archivo .bashrc.
+
+    - Contacto: Muestra información de contacto del creador utilizando zenity --info.
+
+    - Ayuda: Muestra un mensaje de ayuda utilizando zenity --info.

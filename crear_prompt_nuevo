@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# Comprueba si hay navegadores web instalados en el sistema Linux utilizando Zenity
+
+while :
+do
+# Función para comprobar si un programa está instalado
+check_installed() {
+    if command -v "$1" &>/dev/null; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
+# Lista de navegadores web para verificar
+browsers=("firefox" "google-chrome-stable" "chromium-browser")
+
+# Lista de navegadores instalados
+installed_browsers=()
+
+# Verificar cada navegador en la lista
+for browser in "${browsers[@]}"; do
+    if [ "$(check_installed "$browser")" == "true" ]; then
+        installed_browsers+=("$browser")
+    fi
+done
+
+# Mostrar lista de navegadores instalados utilizando Zenity
+if [ ${#installed_browsers[@]} -eq 0 ]; then
+    #sino hay navegadores instalados entra aqui y carga el fichero de instalar navegadoresInstalarNavegadores.sh
+    #while :
+    #do
+        # Mostrar un menú de selección utilizando Zenity
+        navegador=$(zenity --list --title="Creado por SUKIGSX" \
+        --text="No se ha encontrado un navegador en tu sistema.Seleccione uno a instalar:" \
+        --column="firefox" "google-chrome-stable" "chromium-browser" \
+        --cancel-label="Atrás" \
+        --width=200 \
+        --height=250)
+
+        # Verificar si se hizo clic en "Cancelar"
+        if [ $? -ne 0 ]; then
+            exit
+        fi
+
+        #exporta la variable navegador al script de install_navegador.sh
+        export navegador=$navegador
+        bash install_navegador
+
+else
+    selected_browser=$(zenity --list --title="creado por SUKIGSX" \
+    --text="Selecciona un navegador para cargar la web de creacion del prompt." \
+    --column="Navegadores disponibles:" "${installed_browsers[@]}" \
+    --cancel-label="Atras" \
+    --ok-label="Aceptar" \
+    --width=200 \
+    --height=250)
+
+    if [ $? = 1 ]; then
+        exit
+    fi
+
+    if [ -n "$selected_browser" ]; then
+        #comienza la creacion del prompt
+        zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda_prompt" --cancel-label="Atras" --ok-label="Aceptar" --width=600 --height=400
+        if [ $? = 1 ]; then
+            exit
+        fi
+
+        #comprueba que no tengas ningun prompt creado por el script crear_prompt.sh
+        #comprueba que existe la carpeta .config
+        if [ -d /home/$(whoami)/.config ]; then
+            echo ""
+        else
+            mkdir /home/$(whoami)/.config /dev/null 2>&1
+
+        fi
+
+        #comprueba que no tengas ya un prompt
+        if grep -q "source /home/$(whoami)/.config/crear_prompt/prompt" "/home/$(whoami)/.bashrc"; then
+            zenity --info --title="Creado por SUKIGSX" --text="Ya tienes un prompt creado con este script.\nBorralo desde el menu principal." --timeout=5; exit
+        else
+            #vacia el portapapeles
+            echo -n | xclip -selection clipboard
+
+            #carga la pagina con el navegador seleccionado
+            $selected_browser https://bash-prompt-generator.org/
+
+            #copia el portapapeles a fichero prompt
+            prompt=$(xclip -o)
+
+            #le pregunta y muestra el contenido del portapapeles o prompt seleccionado
+            zenity --question --title="Creado por SUKIGSX" --text="Este es el prompt que has seleccionado:\n\n$prompt\n\n¿ Es correcpto ?" --cancel-label="No" --ok-label="Si"
+            if [ $? = 0 ]; then
+                #crea la entrada en el .bashrc
+                echo "source /home/$(whoami)/.config/crear_prompt/prompt" >> /home/$(whoami)/.bashrc
+
+                #crea la carpeta de configuracion
+                mkdir /home/$(whoami)/.config/crear_prompt
+
+                #mete el contenido al fichero de configuracion
+                echo "$prompt" > "/home/$(whoami)/.config/crear_prompt/prompt"
+
+                #le indico que ya esta creado
+                zenity --info --title="Creado por SUKIGSX" --text="Tu prompt se ha mofificado correctamente." --timeout=5; exit
+            else
+                echo -n | xclip -selection clipboard
+                zenity --info --title="Creado por SUKIGSX" --text="Se regresa al menu principal sin modificar nada." --timeout=5; exit
+            fi
+
+            echo "$prompt" > "/home/$(whoami)/.config/crear_prompt/prompt"
+
+            #le indico que ya esta creado
+
+        fi
+
+        zenity --info --title="Creado por SUKIGSX" --text="Has seleccionado: $selected_browser "
+
+    else
+        zenity --error --title="Creado por SUKIGSX" --text="No has seleccionado ningún navegador."
+    fi
+fi
+done
