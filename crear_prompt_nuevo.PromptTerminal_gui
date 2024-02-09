@@ -63,7 +63,7 @@ else
 
     if [ -n "$selected_browser" ]; then
         #comienza la creacion del prompt
-        zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda_prompt" --cancel-label="Atras" --ok-label="Aceptar" --width=600 --height=400
+        zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda_prompt.PromptTerminal_gui" --cancel-label="Atras" --ok-label="Aceptar" --width=600 --height=400
         if [ $? = 1 ]; then
             exit
         fi

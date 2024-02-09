@@ -107,7 +107,7 @@ fi
 
 solo_mira_si_actualizar(){
 archivo_local="crear_prompt.sh" # Nombre del archivo local
-ruta_repositorio="https://github.com/sukigsx/crear_prompt_terminal.git" #ruta del repositorio para actualizar y clonar con git clone
+ruta_repositorio="https://github.com/sukigsx/PromptTerminal_gui.git" #ruta del repositorio para actualizar y clonar con git clone
 
 # Obtener la ruta del script
 descarga=$(dirname "$(readlink -f "$0")")
@@ -243,7 +243,7 @@ else
             ;;
 
         "Crear prompt nuevo")
-            bash crear_prompt_nuevo
+            bash crear_prompt_nuevo.PromptTerminal_gui
             ;;
         "Borrar prompt")
             if zenity --question --title="Creado por SUKIGSX" --text="¿Quieres borrar el prompt que tienes actualmente?\n\n- Se borrara la entrada del .bashrc.\n- Se eliminara el fichero que guarda el prompt." --title="Confirmación de borrado" --cancel-label="No" --ok-label="Si"; then
@@ -259,11 +259,11 @@ else
             zenity --info --title="Creado por SUKIGSX" --text="Contacto con SUKIGSX:\n\nWeb: repositorios.mbbsistemas.es\nCorreo: mbbsistemas@gmail.com"
             ;;
         "Ayuda")
-            zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.txt" --cancel-label="Ver mas grande" --ok-label="Aceptar" --width=600 --height=400
+            zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.PromptTerminal_gui" --cancel-label="Ver mas grande" --ok-label="Aceptar" --width=600 --height=400
             if [ $? = 0 ]; then
                 echo ""
             else
-                zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.txt" --cancel-label="Menu principal" --ok-label="Aceptar" --width=1500 --height=1000
+                zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.PromptTerminal_gui" --cancel-label="Menu principal" --ok-label="Aceptar" --width=1500 --height=1000
             fi
             ;;
         *)
