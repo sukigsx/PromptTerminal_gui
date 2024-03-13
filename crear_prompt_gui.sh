@@ -1,4 +1,5 @@
 #!/bin/bash
+ruta_ejecucion=$(dirname "$(readlink -f "$0")")
 
 #colores
 #ejemplo: echo -e "${verde} La opcion (-e) es para que pille el color.${borra_colores}"
@@ -243,7 +244,7 @@ else
             ;;
 
         "Crear prompt nuevo")
-            bash crear_prompt_nuevo.PromptTerminal_gui
+            bash $ruta_ejecucion/crear_prompt_nuevo.PromptTerminal_gui
             ;;
         "Borrar prompt")
             if zenity --question --title="Creado por SUKIGSX" --text="¿Quieres borrar el prompt que tienes actualmente?\n\n- Se borrara la entrada del .bashrc.\n- Se eliminara el fichero que guarda el prompt." --title="Confirmación de borrado" --cancel-label="No" --ok-label="Si"; then
