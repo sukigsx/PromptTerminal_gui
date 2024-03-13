@@ -46,7 +46,7 @@ if [ ${#installed_browsers[@]} -eq 0 ]; then
 
         #exporta la variable navegador al script de install_navegador.sh
         export navegador=$navegador
-        bash install_navegador
+        bash $ruta_ejecucion/install_navegador
 
 else
     selected_browser=$(zenity --list --title="creado por SUKIGSX" \

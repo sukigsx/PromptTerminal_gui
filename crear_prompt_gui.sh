@@ -260,11 +260,11 @@ else
             zenity --info --title="Creado por SUKIGSX" --text="Contacto con SUKIGSX:\n\nWeb: repositorios.mbbsistemas.es\nCorreo: mbbsistemas@gmail.com"
             ;;
         "Ayuda")
-            zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.PromptTerminal_gui" --cancel-label="Ver mas grande" --ok-label="Aceptar" --width=600 --height=400
+            zenity --text-info --title="Creado por SUKIGSX" --filename="$ruta_ejecucion/ayuda.PromptTerminal_gui" --cancel-label="Ver mas grande" --ok-label="Aceptar" --width=600 --height=400
             if [ $? = 0 ]; then
                 echo ""
             else
-                zenity --text-info --title="Creado por SUKIGSX" --filename="ayuda.PromptTerminal_gui" --cancel-label="Menu principal" --ok-label="Aceptar" --width=1500 --height=1000
+                zenity --text-info --title="Creado por SUKIGSX" --filename="$ruta_ejecucion/ayuda.PromptTerminal_gui" --cancel-label="Menu principal" --ok-label="Aceptar" --width=1500 --height=1000
             fi
             ;;
         *)
